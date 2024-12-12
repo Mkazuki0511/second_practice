@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) =>
-                    updatepage(post),
+                    Updatepage(post),
                 ),
               );
               await _fetchFirebaseData();
@@ -118,23 +118,23 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.person,
+                            const Icon(Icons.person,
                             size: 48,
                             ),
                             Text(
                 post.text,
-                            style: TextStyle(fontSize: 24,
+                            style: const TextStyle(fontSize: 24,
                   fontWeight:
                   FontWeight.bold),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             IconButton(onPressed: ()
                             async{
                               //削除します
                             await  _delete(post.id);
                             await  _fetchFirebaseData();
                             },
-                              icon: Icon(Icons.delete),),
+                              icon: const Icon(Icons.delete),),
                           ],
                         )
                         ),

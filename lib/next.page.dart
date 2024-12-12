@@ -25,8 +25,7 @@ class _State extends State<Addpage> {
       body: Column(
         children: [
           TextField(onChanged: (value) {
-              print(value);
-              newWord = value;
+                      newWord = value;
             },),
           ElevatedButton(
             onPressed: () {
@@ -34,7 +33,7 @@ class _State extends State<Addpage> {
               _addFierbaseData();
               Navigator.pop(context);
             },
-            child: Text("追加"),)
+            child: const Text("追加"),)
         ],
       ),
     );

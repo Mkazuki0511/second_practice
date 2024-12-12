@@ -2,16 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:second/post.dart';
 
-class updatepage extends StatefulWidget {
-  const updatepage(this.post,{super.key});
+class Updatepage extends StatefulWidget {
+  const Updatepage(this.post,{super.key});
 
   final Post post;
 
   @override
-  State<updatepage> createState() => _updatepageState();
+  State<Updatepage> createState() => _UpdatepageState();
 }
 
-class _updatepageState extends State<updatepage> {
+class _UpdatepageState extends State<Updatepage> {
   String updatedWord = "";
 
   Future _updateFierbaseData() async {
@@ -36,7 +36,6 @@ class _updatepageState extends State<updatepage> {
           TextFormField(
             initialValue: widget.post.text,
             onChanged: (value) {
-            print(value);
             updatedWord = value;
             setState(() {
 
@@ -49,7 +48,7 @@ class _updatepageState extends State<updatepage> {
               _updateFierbaseData();
               Navigator.pop(context);
             },
-            child: Text("更新"),
+            child: const Text("更新"),
           ),
         ],
       ),
