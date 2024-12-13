@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:second/lobby_page.dart';
 import 'package:second/next.page.dart';
 import 'package:second/post.dart';
 import 'package:second/update_page.dart';
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLogin = FirebaseAuth.instance.currentUser != null;
+    print(isLogin);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: isLogin ? const MyHomePage(title: 'home') : const LobbyPage(),
     );
   }
 }
@@ -92,10 +97,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
         title: Text(widget.title),
+        actions: [
+          //ログアウトボタン
+          IconButton(
+              onPressed: () async{
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LobbyPage(),
+                  ),
+                      (Route<dynamic> route) => false,
+                );
+              },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Center(
 
